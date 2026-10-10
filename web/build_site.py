@@ -114,6 +114,16 @@ def main():
     static = os.path.join(ROOT, "web", "static")
     for name in os.listdir(static):
         shutil.copy(os.path.join(static, name), os.path.join(SITE, name))
+    # resoconto (senza chiavi) salvato nel repository: serve a verificare fonti e aggiornamenti
+    stato = {"aggiornato": data.get("updated_at"), "problemi": errors,
+             "chiave_football_data_org": bool(os.environ.get("FDORG_KEY")),
+             "peso_modello": (data.get("blend") or {}).get("w"), "peso_xg": (data.get("xg") or {}).get("beta"),
+             "campionati": {n: {"fonte": ld.get("source"), "giocate": ld.get("played"), "ultimo": ld.get("last_result"),
+                                "da_football_data_org": sum(1 for m in ld.get("matches", []) if m.get("src") == "fdorg"),
+                                "prossime": len(ld.get("fixtures", []))}
+                            for n, ld in data.get("leagues", {}).items()}}
+    with open(os.path.join(STATE, "stato.json"), "w", encoding="utf-8") as f:
+        json.dump(stato, f, ensure_ascii=False, indent=1)
     print(f"Pagina creata: {sum(len(l['matches']) for l in payload['leagues'])} partite, problemi: {errors}")
 
 

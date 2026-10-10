@@ -8,4 +8,5 @@ site/
 dati/
 state/*
 !state/storico.json
+!state/stato.json
 *.exe
