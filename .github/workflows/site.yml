@@ -39,7 +39,7 @@ jobs:
 
       - name: Scarica dati e crea la pagina
         env:
-          FDORG_KEY: ${{ secrets.FDORG_KEY }}
+          FDORG_KEY: ${{ secrets.FDORG_KEY || vars.FDORG_KEY }}
         run: python web/build_site.py
 
       - name: Salva lo storico pronostici
