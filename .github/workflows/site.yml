@@ -22,6 +22,8 @@ concurrency:
 jobs:
   aggiorna:
     runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Rome
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
