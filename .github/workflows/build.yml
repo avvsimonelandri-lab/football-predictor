@@ -1,12 +1,19 @@
 # Costruisce FootballPredictorPro.exe su un PC Windows di GitHub e lo pubblica come "release".
-# Si avvia da solo quando si pubblica una nuova "release" (es. v2.3) oppure a mano da "Actions".
+# Si avvia da solo quando si carica un tag di versione (es. v2.3), quando si pubblica una release
+# dal sito, oppure a mano da "Actions". Se la release non esiste, viene creata.
 # Il programma installato sui PC controlla le release e si aggiorna da solo.
 name: Crea programma Windows
 
 on:
+  push:
+    tags: ["v*"]
   release:
     types: [published]
   workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -37,7 +44,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: dist/FootballPredictorPro.exe
+          name: Versione ${{ github.ref_name }}
           generate_release_notes: true
+          make_latest: true
 
       - name: Exe scaricabile anche dalla pagina Actions
         uses: actions/upload-artifact@v4
