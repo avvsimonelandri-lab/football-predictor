@@ -1,0 +1,89 @@
+FOOTBALL PREDICTOR PRO 2.2
+==========================
+
+INSTALLAZIONE (una sola volta, circa 5 minuti)
+1. Copia TUTTO il contenuto di questa cartella dentro  Desktop\APP CALCIO
+   (accanto al vecchio FootballPredictorPro.exe).
+2. Fai doppio clic su  CREA_EXE.bat  e aspetta il messaggio "FATTO!".
+   - Se Python non è installato, lo script lo installa da solo: in quel caso
+     chiudi la finestra e rilancia CREA_EXE.bat.
+   - Il vecchio programma viene conservato come FootballPredictorPro_vecchia_versione.exe
+3. Apri il programma dal solito collegamento sul desktop.
+4. In basso a destra attiva "Aggiorna anche ad app chiusa (ogni 6 ore)".
+
+AGGIORNAMENTO AUTOMATICO
+- All'avvio: se i dati hanno più di 4 ore, il programma li riscarica da solo.
+- Ad app aperta: ricontrolla ogni 20 minuti.
+- Ad app chiusa: se hai attivato l'interruttore, Windows lo aggiorna ogni 6 ore
+  (attività "FootballPredictorPro_Aggiornamento" nell'Utilità di pianificazione).
+- Il pulsante AGGIORNA DATI forza un aggiornamento immediato.
+- Se internet non funziona, restano i dati dell'ultimo aggiornamento riuscito.
+- I dati sono nella sottocartella "dati"; il file aggiornamenti.log registra ogni aggiornamento.
+- Lo storico pronostici è in dati\storico.json: non viene mai cancellato dagli aggiornamenti.
+
+FONTI DEI DATI
+- football-data.co.uk: risultati di tutte le partite, calendario e quote medie dei bookmaker.
+- openfootball (GitHub): riserva automatica se la prima fonte non risponde o è indietro.
+  (Non serve più Google Chrome: il vecchio sistema leggeva diretta.it con un browser
+  automatico, era lento e si bloccava ogni volta che il sito cambiava grafica.)
+
+CAMPIONATI
+Serie A, Serie B, Premier League, Championship, LaLiga, LaLiga 2, Bundesliga,
+2. Bundesliga, Ligue 1, Ligue 2, Eredivisie, Primeira Liga, Belgio, Turchia, Scozia.
+
+COSA È CAMBIATO NEL MODELLO
+Prima: Poisson calcolato sui soli totali della classifica, senza vantaggio del campo.
+Ora:   modello Dixon-Coles stimato partita per partita, con
+       - fattore campo stimato per ogni campionato;
+       - più peso alle partite recenti (forma);
+       - anche la stagione precedente, per avere stime sensate a inizio campionato;
+       - stima prudente per le neopromosse;
+       - correzione per i risultati con pochi gol (0-0, 1-0, 0-1, 1-1).
+Su 1.722 partite del 2025/26 (Serie A, Premier, LaLiga, Bundesliga, Ligue 1),
+previste ogni volta solo con i dati disponibili fino a quel giorno:
+       esito 1X2 indovinato  48% (vecchio)  ->  52% (nuovo)
+       errore RPS            0.226          ->  0.205   (più basso è meglio)
+
+SCHEDE
+- Prossime partite: tutte le gare dei prossimi 21 giorni con 1X2, Over 2.5, Goal,
+  risultato più probabile, quote e segnalazione di "valore". "Analizza" apre il dettaglio.
+- Analisi partita: qualsiasi accoppiata, in tre sotto-schede:
+    * Esito e gol: risultati esatti, 1X2 (modello e combinata), doppia chance,
+      under/over da 0.5 a 4.5, goal/no goal, multigol, somma gol, combo, quote eque,
+      confronto con le quote dei bookmaker;
+    * Primo tempo: 1X2 primo e secondo tempo, parziale/finale, under/over per tempo,
+      tempo con più gol;
+    * Angoli · Cartellini · Tiri: valori attesi, under/over totali e per squadra,
+      chi ne fa di più (solo campionati con statistiche su football-data.co.uk).
+- Classifica: calcolata dai risultati, con forma e forza attacco/difesa.
+- Storico pronostici: i pronostici salvati PRIMA delle partite e confrontati con
+  i risultati reali: percentuale di esiti indovinati, risultati esatti, e saldo
+  simulato puntando 1 € su ogni segnalazione di "valore".
+- Affidabilità: quanto ci ha preso il modello nelle ultime 10 settimane (simulazione).
+
+STIMA COMBINATA MODELLO + QUOTE
+Dove ci sono le quote, 1X2 e Over/Under 2.5 sono una media pesata tra modello e
+bookmaker. Il peso viene ricalcolato a ogni aggiornamento scegliendo quello che
+avrebbe sbagliato meno sulle partite delle ultime 10 settimane (si parte dal 35%
+al modello). Le segnalazioni di "valore" usano la stima combinata, quindi sono
+più prudenti e meno frequenti di prima.
+
+NOVITÀ DELLA VERSIONE 2.2
+- xG stimati dai tiri: oltre ai gol, il modello può usare i tiri e i tiri in porta
+  (qualità delle occasioni, meno legata alla fortuna). Il peso viene scelto da solo a
+  ogni aggiornamento confrontando i risultati delle ultime 10 settimane: se gli xG non
+  migliorano i pronostici, il peso resta a zero. Vale per tutti i campionati con le
+  statistiche di football-data.co.uk. (Understat non è utilizzabile: blocca gli
+  accessi automatici.)
+- Risultati in giornata: con una chiave gratuita di football-data.org (Impostazioni)
+  i risultati arrivano poche ore dopo il fischio finale, invece di 2 volte a settimana.
+  Campionati coperti: Serie A, Premier, Championship, LaLiga, Bundesliga, Ligue 1,
+  Eredivisie, Primeira Liga.
+- Notifiche di Windows quando compaiono nuove segnalazioni di "valore" (anche ad app
+  chiusa, con l'aggiornamento automatico attivo). Si possono disattivare nelle Impostazioni.
+- Esportazione Excel e PDF dei pronostici dei prossimi 7 giorni (scheda Prossime partite).
+- Aggiornamento automatico del programma e versione per telefono: vedi GUIDA_GITHUB.txt.
+
+AVVERTENZA
+Sono stime statistiche, non certezze. Il modello non conosce infortuni, squalifiche
+e turnover. Il gioco è vietato ai minori e può causare dipendenza.

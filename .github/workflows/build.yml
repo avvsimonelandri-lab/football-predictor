@@ -1,0 +1,46 @@
+# Costruisce FootballPredictorPro.exe su un PC Windows di GitHub e lo pubblica come "release".
+# Si avvia da solo quando si pubblica una nuova "release" (es. v2.3) oppure a mano da "Actions".
+# Il programma installato sui PC controlla le release e si aggiorna da solo.
+name: Crea programma Windows
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Numero di versione dal tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        run: echo "VERSION = \"${GITHUB_REF_NAME#v}\"" > version.py
+
+      - name: Librerie
+        run: pip install -r requirements.txt pyinstaller
+
+      - name: Crea exe
+        run: pyinstaller --noconfirm --clean --onefile --windowed --name FootballPredictorPro --collect-data customtkinter app.py
+
+      - name: Pubblica la release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/FootballPredictorPro.exe
+          generate_release_notes: true
+
+      - name: Exe scaricabile anche dalla pagina Actions
+        uses: actions/upload-artifact@v4
+        with:
+          name: FootballPredictorPro
+          path: dist/FootballPredictorPro.exe

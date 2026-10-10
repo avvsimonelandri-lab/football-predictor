@@ -1,0 +1,11 @@
+# file generati
+dist/
+build/
+*.spec
+__pycache__/
+.venv/
+site/
+dati/
+state/*
+!state/storico.json
+*.exe
