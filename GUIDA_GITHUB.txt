@@ -1,64 +1,30 @@
-GUIDA GITHUB — aggiornamento automatico del programma e versione per telefono
-=============================================================================
+GUIDA GITHUB — come funziona questo repository
+==============================================
 
-Cosa si ottiene (una sola configurazione, circa 15 minuti, tutto gratuito):
-  * VERSIONE PER TELEFONO: una pagina web con pronostici, classifica e storico,
-    aggiornata da sola ogni 4 ore anche con il PC spento.
-    Indirizzo: https://NOMEUTENTE.github.io/NOMEREPOSITORY/
-    Sul telefono: aprila e scegli "Aggiungi a schermata Home" per averla come un'app.
-  * AGGIORNAMENTO AUTOMATICO DEL PROGRAMMA: ogni nuova versione viene costruita da
-    GitHub e il programma sul PC la propone e la installa da solo.
-  * Niente più CREA_EXE.bat: l'exe lo prepara GitHub.
+Repository:          https://github.com/avvsimonelandri-lab/football-predictor
+Versione telefono:   https://avvsimonelandri-lab.github.io/football-predictor/
+Ultima versione exe: https://github.com/avvsimonelandri-lab/football-predictor/releases/latest
 
-Nota: per usare GitHub gratis il repository deve essere PUBBLICO, quindi il codice
-e la pagina dei pronostici sono visibili a chi conosce l'indirizzo (la pagina non
-viene indicizzata dai motori di ricerca). Le chiavi restano segrete.
+COSA FA DA SOLO
+* "Pagina telefono" (.github/workflows/site.yml): ogni 4 ore scarica i dati, aggiorna
+  lo storico pronostici (state/storico.json) e pubblica la pagina per il telefono.
+* "Crea programma Windows" (.github/workflows/build.yml): quando cambia il numero in
+  version.py costruisce FootballPredictorPro.exe su Windows, lo prova (aggiornamento
+  dati senza finestra) e lo pubblica come release vX.Y. Il programma sul PC lo propone
+  e lo installa da solo (Impostazioni -> campo GitHub: avvsimonelandri-lab/football-predictor).
 
+NUOVE VERSIONI
+Le pubblica Claude: modifica il codice, aumenta il numero in version.py e carica tutto.
+Si può anche fare a mano: scheda Actions -> "Crea programma Windows" -> Run workflow.
 
-1. CREA L'ACCOUNT E IL REPOSITORY
-   a. Vai su https://github.com/signup e crea un account gratuito.
-   b. In alto a destra "+" -> "New repository".
-      Nome: football-predictor  -  Visibilità: Public  -  premi "Create repository".
-
-2. CARICA I FILE
-   a. Nella pagina del repository: "uploading an existing file".
-   b. Trascina nella finestra TUTTO il contenuto della cartella
-      "FootballPredictorPro 2.2" (comprese le cartelle .github, web e state).
-      Se la cartella .github non si vede: in Esplora file -> Visualizza -> spunta
-      "Elementi nascosti".
-   c. Premi "Commit changes".
-
-3. ATTIVA LA PAGINA PER TELEFONO
-   a. Settings (ingranaggio in alto) -> Pages.
-   b. Alla voce "Source" scegli "GitHub Actions".
-   c. Scheda "Actions" -> a sinistra "Pagina telefono" -> "Run workflow" -> "Run workflow".
-      Dopo 2-3 minuti la pagina è pronta all'indirizzo
-      https://NOMEUTENTE.github.io/football-predictor/
-   (Se Actions chiede conferma per abilitare i workflow, premi "I understand... enable".)
-
-4. (FACOLTATIVO) RISULTATI IN GIORNATA ANCHE SUL TELEFONO
-   Settings -> Secrets and variables -> Actions -> "New repository secret"
-   Nome: FDORG_KEY   Valore: la tua chiave di football-data.org
-
-5. PRIMA VERSIONE DEL PROGRAMMA
-   a. Nella pagina del repository, a destra: "Releases" -> "Create a new release".
-   b. "Choose a tag": scrivi  v2.2  e premi "Create new tag".
-   c. Titolo: Versione 2.2  -> "Publish release".
-   d. Dopo circa 5 minuti nella release compare FootballPredictorPro.exe: scaricalo
-      e mettilo in Desktop\APP CALCIO al posto del vecchio.
-
-6. COLLEGA IL PROGRAMMA
-   Apri il programma -> Impostazioni -> campo GitHub: scrivi NOMEUTENTE/football-predictor
-   -> SALVA. Da quel momento il programma controlla da solo le nuove versioni.
-
-COME ARRIVANO LE VERSIONI SUCCESSIVE
-   Quando riceverai file aggiornati: caricali nel repository (come al punto 2,
-   sovrascrivendo) e pubblica una nuova release con il numero successivo (v2.3, v2.4...).
-   Il programma sul PC ti chiederà se installarla.
+RISULTATI IN GIORNATA ANCHE SUL TELEFONO (facoltativo)
+Settings -> Secrets and variables -> Actions -> New repository secret
+Nome: FDORG_KEY   Valore: la chiave gratuita di football-data.org
 
 NOTE
-   * GitHub sospende i lavori programmati dei repository senza attività per 60 giorni:
-     lo storico salvato ogni 4 ore conta come attività, ma se la pagina smette di
-     aggiornarsi basta un "Run workflow" manuale (punto 3c).
-   * In alternativa puoi collegare GitHub al tuo account Claude (Impostazioni di
-     claude.ai -> Connettori): così Claude può caricare lui stesso le nuove versioni.
+* Il repository è pubblico: codice e pagina sono visibili a chi ha l'indirizzo (la pagina
+  non viene indicizzata dai motori di ricerca). Le chiavi nei "Secrets" restano segrete.
+* GitHub sospende i lavori programmati dopo 60 giorni senza attività: i salvataggi dello
+  storico contano come attività; se la pagina smette di aggiornarsi: Actions ->
+  "Pagina telefono" -> Run workflow.
+* Sul telefono: apri la pagina e scegli "Aggiungi a schermata Home".
