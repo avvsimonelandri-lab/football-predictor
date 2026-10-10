@@ -109,6 +109,11 @@ def main():
         f.write(html)
     with open(os.path.join(SITE, ".nojekyll"), "w") as f:
         f.write("")
+    # icona e manifest per "Aggiungi alla schermata Home" (iPhone / Android)
+    import shutil
+    static = os.path.join(ROOT, "web", "static")
+    for name in os.listdir(static):
+        shutil.copy(os.path.join(static, name), os.path.join(SITE, name))
     print(f"Pagina creata: {sum(len(l['matches']) for l in payload['leagues'])} partite, problemi: {errors}")
 
 
