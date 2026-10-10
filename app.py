@@ -29,11 +29,15 @@ try:
 except Exception:
     APP_VERSION = "2.2"
 
+# colori (tema chiaro, tema scuro): customtkinter sceglie quello giusto in base al tema attivo
 C = {
-    "bg": "#0f1115", "panel": "#171a21", "panel2": "#1e222b", "line": "#2a2f3a",
-    "text": "#e7e9ee", "muted": "#8a90a0", "accent": "#2E7D32", "accent_h": "#1B5E20",
-    "red": "#D32F2F", "red_h": "#B71C1C", "gold": "#E0B03A", "blue": "#4F8EF7",
+    "bg": ("#f3f4f7", "#0f1115"), "panel": ("#ffffff", "#171a21"), "panel2": ("#eef0f4", "#1e222b"),
+    "line": ("#d9dce3", "#2a2f3a"), "text": ("#14171f", "#e7e9ee"), "muted": ("#5d6475", "#8a90a0"),
+    "accent": ("#2E7D32", "#2E7D32"), "accent_h": ("#1B5E20", "#1B5E20"),
+    "red": ("#D32F2F", "#D32F2F"), "red_h": ("#B71C1C", "#B71C1C"),
+    "gold": ("#9a6700", "#E0B03A"), "blue": ("#2f6fe0", "#4F8EF7"),
 }
+THEMES = {"Chiaro": "light", "Scuro": "dark", "Come Windows": "system"}
 GIORNI = ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]
 
 
@@ -64,7 +68,7 @@ def fmt_dt(iso):
 class FootballApp(ctk.CTk):
     def __init__(self):
         super().__init__()
-        ctk.set_appearance_mode("dark")
+        ctk.set_appearance_mode(settings.load(updater.data_dir()).get("theme", "light"))
         ctk.set_default_color_theme("blue")
         self.title(f"Football Predictor Pro {APP_VERSION}")
         self.geometry("1240x860")
@@ -110,7 +114,7 @@ class FootballApp(ctk.CTk):
                                         font=("Helvetica", 13, "bold"))
         self.btn_update.grid(row=0, column=2)
         ctk.CTkButton(right, text="Impostazioni", command=self.open_settings, width=110, height=34,
-                      fg_color=C["panel2"], hover_color=C["line"]).grid(row=0, column=3, padx=(10, 0))
+                      fg_color=C["panel2"], hover_color=C["line"], text_color=C["text"]).grid(row=0, column=3, padx=(10, 0))
         self.label_round = ctk.CTkLabel(right, text="", font=("Helvetica", 12, "italic"), text_color=C["muted"])
         self.label_round.grid(row=1, column=0, columnspan=4, sticky="e", pady=(4, 0))
 
@@ -727,7 +731,7 @@ class FootballApp(ctk.CTk):
         w = ctk.CTkToplevel(self)
         self._settings_win = w
         w.title("Impostazioni")
-        w.geometry("640x600")
+        w.geometry("640x660")
         w.configure(fg_color=C["panel"])
         w.after(100, w.lift)
         w.grid_columnconfigure(0, weight=1)
@@ -768,6 +772,17 @@ class FootballApp(ctk.CTk):
         ctk.CTkSwitch(w, text="Notifica di Windows per nuove segnalazioni di valore", variable=v_val).grid(row=8, column=0, pady=3, **pad)
         ctk.CTkSwitch(w, text="Notifica di Windows a ogni aggiornamento dei dati", variable=v_upd).grid(row=9, column=0, pady=3, **pad)
         ctk.CTkSwitch(w, text="Controlla da solo le nuove versioni del programma", variable=v_app).grid(row=10, column=0, pady=3, **pad)
+        trow = ctk.CTkFrame(w, fg_color="transparent")
+        trow.grid(row=14, column=0, pady=(6, 0), **pad)
+        ctk.CTkLabel(trow, text="Aspetto:", font=("Helvetica", 13, "bold")).pack(side="left", padx=(0, 10))
+        cur = next((k for k, v in THEMES.items() if v == cfg.get("theme", "light")), "Chiaro")
+        v_theme = ctk.StringVar(value=cur)
+
+        def set_theme(label):
+            cfg["theme"] = THEMES[label]
+            settings.save(updater.data_dir(), cfg)
+            ctk.set_appearance_mode(THEMES[label])
+        ctk.CTkSegmentedButton(trow, values=list(THEMES), variable=v_theme, command=set_theme).pack(side="left")
 
         btns = ctk.CTkFrame(w, fg_color="transparent")
         btns.grid(row=11, column=0, pady=(18, 10), **pad)
@@ -785,7 +800,7 @@ class FootballApp(ctk.CTk):
             self.status.configure(text="Impostazioni salvate. La chiave football-data.org verrà usata dal prossimo aggiornamento.")
             w.destroy()
         ctk.CTkButton(w, text="SALVA", width=160, height=36, fg_color=C["accent"], hover_color=C["accent_h"],
-                      command=save_close).grid(row=13, column=0, pady=16, padx=18, sticky="e")
+                      command=save_close).grid(row=15, column=0, pady=16, padx=18, sticky="e")
 
     def _save_settings(self, cfg, e_key, e_repo, v_val, v_upd, v_app):
         cfg.update(fdorg_key=e_key.get().strip(), github_repo=e_repo.get().strip(),

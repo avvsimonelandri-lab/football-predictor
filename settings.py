@@ -11,6 +11,7 @@ DEFAULTS = {
     "notify_update": False,     # notifica Windows a ogni aggiornamento dati
     "auto_app_update": True,    # controlla da solo se c'è una nuova versione del programma
     "last_app_check": "",
+    "theme": "light",           # aspetto: light (sfondo bianco), dark, system
 }
 
 

@@ -1,4 +1,4 @@
-FOOTBALL PREDICTOR PRO 2.2
+FOOTBALL PREDICTOR PRO 2.3
 ==========================
 
 INSTALLAZIONE (una sola volta, circa 5 minuti)
@@ -67,6 +67,10 @@ bookmaker. Il peso viene ricalcolato a ogni aggiornamento scegliendo quello che
 avrebbe sbagliato meno sulle partite delle ultime 10 settimane (si parte dal 35%
 al modello). Le segnalazioni di "valore" usano la stima combinata, quindi sono
 più prudenti e meno frequenti di prima.
+
+NOVITÀ DELLA VERSIONE 2.3
+- Sfondo bianco (tema chiaro) come aspetto predefinito. In Impostazioni -> Aspetto si
+  può scegliere Chiaro, Scuro oppure Come Windows.
 
 NOVITÀ DELLA VERSIONE 2.2
 - xG stimati dai tiri: oltre ai gol, il modello può usare i tiri e i tiri in porta
