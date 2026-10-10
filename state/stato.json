@@ -1,0 +1,114 @@
+{
+ "aggiornato": "2026-10-11T00:32:11",
+ "problemi": [],
+ "chiave_football_data_org": false,
+ "peso_modello": 0.0,
+ "peso_xg": 0.5,
+ "campionati": {
+  "Serie A": {
+   "fonte": "football-data.co.uk",
+   "giocate": 50,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 7
+  },
+  "Serie B": {
+   "fonte": "football-data.co.uk",
+   "giocate": 50,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 3
+  },
+  "Premier League": {
+   "fonte": "football-data.co.uk",
+   "giocate": 50,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 4
+  },
+  "Championship": {
+   "fonte": "football-data.co.uk",
+   "giocate": 95,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 1
+  },
+  "LaLiga": {
+   "fonte": "football-data.co.uk",
+   "giocate": 69,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 5
+  },
+  "LaLiga 2": {
+   "fonte": "football-data.co.uk",
+   "giocate": 88,
+   "ultimo": "2026-10-05",
+   "da_football_data_org": 0,
+   "prossime": 8
+  },
+  "Bundesliga": {
+   "fonte": "football-data.co.uk",
+   "giocate": 36,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 2
+  },
+  "2. Bundesliga": {
+   "fonte": "football-data.co.uk",
+   "giocate": 54,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 3
+  },
+  "Ligue 1": {
+   "fonte": "football-data.co.uk",
+   "giocate": 45,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 3
+  },
+  "Ligue 2": {
+   "fonte": "football-data.co.uk",
+   "giocate": 63,
+   "ultimo": "2026-09-19",
+   "da_football_data_org": 0,
+   "prossime": 1
+  },
+  "Eredivisie": {
+   "fonte": "football-data.co.uk",
+   "giocate": 63,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 4
+  },
+  "Primeira Liga": {
+   "fonte": "football-data.co.uk",
+   "giocate": 62,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 4
+  },
+  "Jupiler Pro League": {
+   "fonte": "football-data.co.uk",
+   "giocate": 63,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 4
+  },
+  "Süper Lig": {
+   "fonte": "football-data.co.uk",
+   "giocate": 54,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 4
+  },
+  "Scottish Premiership": {
+   "fonte": "football-data.co.uk",
+   "giocate": 42,
+   "ultimo": "2026-09-20",
+   "da_football_data_org": 0,
+   "prossime": 2
+  }
+ }
+}
