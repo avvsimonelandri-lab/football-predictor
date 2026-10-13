@@ -1,9 +1,9 @@
 {
- "aggiornato": "2026-10-13T18:39:41",
+ "aggiornato": "2026-10-13T22:53:14",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
- "peso_xg": 0.5,
+ "peso_xg": 0.7,
  "campionati": {
   "Serie A": {
    "fonte": "football-data.co.uk",
@@ -21,17 +21,17 @@
   },
   "Premier League": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 64,
+   "giocate": 65,
    "ultimo": "2026-10-12",
-   "da_football_data_org": 4,
+   "da_football_data_org": 5,
    "prossime": 27
   },
   "Championship": {
-   "fonte": "football-data.co.uk",
-   "giocate": 107,
-   "ultimo": "2026-10-11",
-   "da_football_data_org": 0,
-   "prossime": 12
+   "fonte": "football-data.co.uk + football-data.org",
+   "giocate": 112,
+   "ultimo": "2026-10-13",
+   "da_football_data_org": 5,
+   "prossime": 7
   },
   "LaLiga": {
    "fonte": "football-data.co.uk + football-data.org",
