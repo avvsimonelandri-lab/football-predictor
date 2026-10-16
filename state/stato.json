@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-15T22:50:44",
+ "aggiornato": "2026-10-16T02:59:39",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
@@ -21,9 +21,9 @@
   },
   "Premier League": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 64,
+   "giocate": 65,
    "ultimo": "2026-10-12",
-   "da_football_data_org": 4,
+   "da_football_data_org": 5,
    "prossime": 27
   },
   "Championship": {
@@ -66,7 +66,7 @@
    "giocate": 60,
    "ultimo": "2026-10-11",
    "da_football_data_org": 6,
-   "prossime": 27
+   "prossime": 28
   },
   "Ligue 2": {
    "fonte": "football-data.co.uk",
@@ -80,14 +80,14 @@
    "giocate": 72,
    "ultimo": "2026-10-11",
    "da_football_data_org": 0,
-   "prossime": 24
+   "prossime": 25
   },
   "Primeira Liga": {
    "fonte": "football-data.co.uk",
    "giocate": 71,
    "ultimo": "2026-10-12",
    "da_football_data_org": 0,
-   "prossime": 14
+   "prossime": 15
   },
   "Jupiler Pro League": {
    "fonte": "football-data.co.uk",
