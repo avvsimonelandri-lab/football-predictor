@@ -1,16 +1,16 @@
 {
- "aggiornato": "2026-10-17T14:54:17",
+ "aggiornato": "2026-10-17T18:47:04",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
  "peso_xg": 0.7,
  "campionati": {
   "Serie A": {
-   "fonte": "football-data.co.uk",
-   "giocate": 60,
-   "ultimo": "2026-10-12",
-   "da_football_data_org": 0,
-   "prossime": 9
+   "fonte": "football-data.co.uk + football-data.org",
+   "giocate": 62,
+   "ultimo": "2026-10-17",
+   "da_football_data_org": 2,
+   "prossime": 8
   },
   "Serie B": {
    "fonte": "football-data.co.uk",
@@ -21,24 +21,24 @@
   },
   "Premier League": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 65,
-   "ultimo": "2026-10-12",
-   "da_football_data_org": 5,
-   "prossime": 10
+   "giocate": 69,
+   "ultimo": "2026-10-17",
+   "da_football_data_org": 9,
+   "prossime": 6
   },
   "Championship": {
-   "fonte": "football-data.co.uk",
-   "giocate": 119,
-   "ultimo": "2026-10-14",
-   "da_football_data_org": 0,
-   "prossime": 11
+   "fonte": "football-data.co.uk + football-data.org",
+   "giocate": 130,
+   "ultimo": "2026-10-17",
+   "da_football_data_org": 11,
+   "prossime": 40
   },
   "LaLiga": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 85,
-   "ultimo": "2026-10-16",
-   "da_football_data_org": 7,
-   "prossime": 9
+   "giocate": 87,
+   "ultimo": "2026-10-17",
+   "da_football_data_org": 9,
+   "prossime": 8
   },
   "LaLiga 2": {
    "fonte": "football-data.co.uk",
@@ -49,10 +49,10 @@
   },
   "Bundesliga": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 46,
-   "ultimo": "2026-10-16",
-   "da_football_data_org": 1,
-   "prossime": 8
+   "giocate": 51,
+   "ultimo": "2026-10-17",
+   "da_football_data_org": 6,
+   "prossime": 3
   },
   "2. Bundesliga": {
    "fonte": "football-data.co.uk",
@@ -77,10 +77,10 @@
   },
   "Eredivisie": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 73,
-   "ultimo": "2026-10-16",
-   "da_football_data_org": 1,
-   "prossime": 8
+   "giocate": 74,
+   "ultimo": "2026-10-17",
+   "da_football_data_org": 2,
+   "prossime": 7
   },
   "Primeira Liga": {
    "fonte": "football-data.co.uk",
