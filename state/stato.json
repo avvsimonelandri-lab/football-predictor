@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-20T06:50:58",
+ "aggiornato": "2026-10-20T10:54:08",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
@@ -63,9 +63,9 @@
   },
   "Ligue 1": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 69,
+   "giocate": 64,
    "ultimo": "2026-10-18",
-   "da_football_data_org": 15,
+   "da_football_data_org": 10,
    "prossime": 27
   },
   "Ligue 2": {
