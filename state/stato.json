@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-24T14:58:12",
+ "aggiornato": "2026-10-24T18:49:00",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
@@ -28,10 +28,10 @@
   },
   "Championship": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 133,
-   "ultimo": "2026-10-23",
-   "da_football_data_org": 1,
-   "prossime": 11
+   "giocate": 137,
+   "ultimo": "2026-10-24",
+   "da_football_data_org": 5,
+   "prossime": 7
   },
   "LaLiga": {
    "fonte": "football-data.co.uk + football-data.org",
