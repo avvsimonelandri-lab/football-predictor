@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-26T15:59:10",
+ "aggiornato": "2026-10-26T18:01:41",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
@@ -77,16 +77,16 @@
   },
   "Eredivisie": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 89,
-   "ultimo": "2026-10-25",
-   "da_football_data_org": 8,
+   "giocate": 85,
+   "ultimo": "2026-10-24",
+   "da_football_data_org": 4,
    "prossime": 16
   },
   "Primeira Liga": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 75,
-   "ultimo": "2026-10-24",
-   "da_football_data_org": 3,
+   "giocate": 78,
+   "ultimo": "2026-10-25",
+   "da_football_data_org": 6,
    "prossime": 1
   },
   "Jupiler Pro League": {
