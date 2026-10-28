@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-10-27T21:53:31",
+ "aggiornato": "2026-10-28T02:20:01",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
@@ -7,17 +7,17 @@
  "campionati": {
   "Serie A": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 81,
+   "giocate": 83,
    "ultimo": "2026-10-27",
-   "da_football_data_org": 1,
-   "prossime": 9
+   "da_football_data_org": 3,
+   "prossime": 7
   },
   "Serie B": {
    "fonte": "football-data.co.uk",
    "giocate": 80,
    "ultimo": "2026-10-25",
    "da_football_data_org": 0,
-   "prossime": 10
+   "prossime": 3
   },
   "Premier League": {
    "fonte": "football-data.co.uk + football-data.org",
