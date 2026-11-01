@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-01T17:53:21",
+ "aggiornato": "2026-11-01T21:53:05",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
@@ -7,10 +7,10 @@
  "campionati": {
   "Serie A": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 96,
+   "giocate": 97,
    "ultimo": "2026-11-01",
-   "da_football_data_org": 6,
-   "prossime": 4
+   "da_football_data_org": 7,
+   "prossime": 3
   },
   "Serie B": {
    "fonte": "football-data.co.uk",
@@ -21,10 +21,10 @@
   },
   "Premier League": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 95,
-   "ultimo": "2026-10-31",
-   "da_football_data_org": 15,
-   "prossime": 2
+   "giocate": 96,
+   "ultimo": "2026-11-01",
+   "da_football_data_org": 16,
+   "prossime": 1
   },
   "Championship": {
    "fonte": "football-data.co.uk + football-data.org",
@@ -35,10 +35,10 @@
   },
   "LaLiga": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 113,
+   "giocate": 115,
    "ultimo": "2026-11-01",
-   "da_football_data_org": 14,
-   "prossime": 4
+   "da_football_data_org": 16,
+   "prossime": 2
   },
   "LaLiga 2": {
    "fonte": "football-data.co.uk",
@@ -49,10 +49,10 @@
   },
   "Bundesliga": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 71,
+   "giocate": 72,
    "ultimo": "2026-11-01",
-   "da_football_data_org": 8,
-   "prossime": 1
+   "da_football_data_org": 9,
+   "prossime": 18
   },
   "2. Bundesliga": {
    "fonte": "football-data.co.uk",
@@ -63,10 +63,10 @@
   },
   "Ligue 1": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 85,
+   "giocate": 87,
    "ultimo": "2026-11-01",
-   "da_football_data_org": 13,
-   "prossime": 4
+   "da_football_data_org": 15,
+   "prossime": 2
   },
   "Ligue 2": {
    "fonte": "football-data.co.uk",
@@ -77,17 +77,17 @@
   },
   "Eredivisie": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 97,
+   "giocate": 98,
    "ultimo": "2026-11-01",
-   "da_football_data_org": 7,
-   "prossime": 1
+   "da_football_data_org": 8,
+   "prossime": 16
   },
   "Primeira Liga": {
    "fonte": "football-data.co.uk + football-data.org",
-   "giocate": 83,
-   "ultimo": "2026-10-31",
-   "da_football_data_org": 2,
-   "prossime": 6
+   "giocate": 86,
+   "ultimo": "2026-11-01",
+   "da_football_data_org": 5,
+   "prossime": 3
   },
   "Jupiler Pro League": {
    "fonte": "football-data.co.uk",
