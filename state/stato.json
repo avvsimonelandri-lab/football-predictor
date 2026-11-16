@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-15T22:05:56",
+ "aggiornato": "2026-11-16T07:43:35",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
@@ -45,7 +45,7 @@
    "giocate": 140,
    "ultimo": "2026-11-09",
    "da_football_data_org": 0,
-   "prossime": 5
+   "prossime": 1
   },
   "Bundesliga": {
    "fonte": "football-data.co.uk",
