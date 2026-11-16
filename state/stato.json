@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-16T07:43:35",
+ "aggiornato": "2026-11-16T19:39:01",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
@@ -42,8 +42,8 @@
   },
   "LaLiga 2": {
    "fonte": "football-data.co.uk",
-   "giocate": 140,
-   "ultimo": "2026-11-09",
+   "giocate": 150,
+   "ultimo": "2026-11-15",
    "da_football_data_org": 0,
    "prossime": 1
   },
