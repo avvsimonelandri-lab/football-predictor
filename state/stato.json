@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-24T15:57:57",
+ "aggiornato": "2026-11-25T01:50:47",
  "problemi": [],
  "chiave_football_data_org": true,
  "peso_modello": 0.0,
@@ -17,7 +17,7 @@
    "giocate": 120,
    "ultimo": "2026-11-22",
    "da_football_data_org": 0,
-   "prossime": 10
+   "prossime": 4
   },
   "Premier League": {
    "fonte": "football-data.co.uk + football-data.org",
@@ -31,7 +31,7 @@
    "giocate": 192,
    "ultimo": "2026-11-22",
    "da_football_data_org": 0,
-   "prossime": 12
+   "prossime": 4
   },
   "LaLiga": {
    "fonte": "football-data.co.uk + football-data.org",
@@ -108,7 +108,7 @@
    "giocate": 81,
    "ultimo": "2026-11-21",
    "da_football_data_org": 0,
-   "prossime": 2
+   "prossime": 0
   }
  }
 }
