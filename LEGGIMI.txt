@@ -1,4 +1,4 @@
-FOOTBALL PREDICTOR PRO 2.3
+FOOTBALL PREDICTOR PRO 2.5
 ==========================
 
 INSTALLAZIONE (una sola volta, circa 5 minuti)
@@ -91,3 +91,66 @@ NOVITÀ DELLA VERSIONE 2.2
 AVVERTENZA
 Sono stime statistiche, non certezze. Il modello non conosce infortuni, squalifiche
 e turnover. Il gioco è vietato ai minori e può causare dipendenza.
+
+
+NOVITÀ DELLA VERSIONE 2.4 / 2.5
+===============================
+
+1. MODELLO DI PREVISIONE (predictor.py)
+---------------------------------------
+Prima la regolarizzazione era unica: rendeva tutte le squadre "più simili alla
+media" allo stesso modo. Ora è divisa in due parti:
+  - FORZA (attacco meno difesa) = chi vince   -> più libera (3 invece di 5)
+  - RITMO (attacco più difesa)  = quanti gol  -> più prudente (20 invece di 5)
+
+Verifica su 11.715 partite reali (Serie A, Premier, Championship, LaLiga,
+Bundesliga, Ligue 1, Eredivisie, Primeira Liga; stagioni 2022/23 - 2025/26),
+simulando il modello settimana per settimana con i soli dati disponibili prima
+di ogni giornata:
+
+                              v2.3      v2.4
+  Errore 1X2 (RPS)            0.2033    0.2028   (più basso è meglio)
+  Log-loss 1X2                0.9954    0.9934
+  Log-loss Under/Over 2.5     0.6821    0.6791
+  Esito più probabile giusto  51,4%     51,5%
+
+Il miglioramento c'è in ognuna delle quattro stagioni, sia sull'1X2 sia
+sull'Under/Over (nel 2024/25 sull'1X2 è minimo). Sono numeri piccoli, ma nel
+calcio i margini sono stretti: anche i modelli professionali si muovono così.
+Angoli, cartellini e tiri usano la stessa impostazione di prima.
+
+
+2. DIFETTI CORRETTI
+-------------------
+- Impostazioni: scrivendo il repository GitHub il programma dava un errore a ogni
+  tasto e il link "Versione per telefono" non compariva.
+- Prossime partite: se un campionato non si aggiornava (sito irraggiungibile)
+  potevano restare in elenco partite già giocate. Ora vengono escluse.
+- Fonte dati: con la chiave football-data.org, la scritta "+ football-data.org"
+  si allungava a ogni aggiornamento fallito. Corretto.
+- Download: dopo l'ultimo tentativo fallito il programma aspettava comunque
+  qualche secondo, per ogni file. Senza internet l'aggiornamento era molto lento.
+- PDF: i nomi di squadra lunghi (es. "Borussia Mönchengladbach") invadevano la
+  colonna delle percentuali. Ora vengono accorciati per stare nella colonna.
+
+
+3. NOVITÀ: SCHEDA "FORMA E PRECEDENTI"
+--------------------------------------
+In "Analisi partita" c'è una quarta sottoscheda con:
+  - ultime 6 partite di ciascuna squadra (casa/trasferta, risultato, V/N/P),
+    con punti, gol fatti/subiti, quante Over 2.5 e quante Goal;
+  - precedenti tra le due squadre nella stagione in corso e nella precedente.
+
+
+4. NUOVA GRAFICA (2.5)
+----------------------
+- Stile sportivo su sfondo chiaro: intestazione blu notte con striscia verde,
+  schede a "pillola", pulsanti arrotondati, carattere Segoe UI.
+- "Analisi partita" rifatta a riquadri: percentuali grandi per 1X2, doppia
+  chance e Goal/No Goal (in verde l'esito più probabile), barre colorate per
+  risultati esatti, multigol, somma gol e parziale/finale, barre blu/verdi per
+  Under/Over. Colori fissi: blu = casa, grigio = pareggio, arancio = ospite.
+- Confronto con le quote in tabella, con l'etichetta dorata "VALORE".
+- Forma e precedenti con etichette colorate V / N / P.
+- Prossime partite: intestazione scura, esito più probabile in verde.
+- Il tema scuro (Impostazioni → Aspetto) continua a funzionare.

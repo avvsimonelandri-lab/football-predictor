@@ -116,7 +116,8 @@ def enrich(name: str, ld: dict, season_start: int, key: str, today: date | None 
         cur = [m for m in ld["matches"] if m.get("season") == "cur"]
         ld["played"] = len(cur)
         ld["last_result"] = max(m["date"] for m in cur)
-        ld["source"] += " + football-data.org"
+        if "football-data.org" not in ld.get("source", ""):
+            ld["source"] = ld.get("source", "") + " + football-data.org"
     if not ld.get("fixtures") and upcoming:
         ld["fixtures"] = sorted(upcoming, key=lambda f: (f["date"], f["time"]))[:40]
     return added

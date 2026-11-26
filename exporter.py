@@ -138,6 +138,16 @@ def to_pdf(rows: list, path: str):
         s = str(s)
         return s if fonts else s.encode("latin-1", "replace").decode("latin-1")
 
+    def fit(s, w):
+        """Accorcia il testo perché stia nella colonna (i nomi lunghi non invadono le colonne vicine)."""
+        s = txt(s)
+        if not w or pdf.get_string_width(s) <= w - 1.5:
+            return s
+        dots = "…" if fonts else "."
+        while s and pdf.get_string_width(s + dots) > w - 1.5:
+            s = s[:-1]
+        return s.rstrip() + dots
+
     pdf.add_page()
     pdf.set_font(fam, "B", 15)
     pdf.cell(0, 8, txt("Football Predictor Pro — pronostici della settimana"), new_x="LMARGIN", new_y="NEXT")
@@ -171,7 +181,7 @@ def to_pdf(rows: list, path: str):
         for (name, w), v in zip(cols, vals):
             bold = (name == {"1": "1", "X": "X", "2": "2"}[r["pron"]]) or (name == "Valore" and v)
             pdf.set_font(fam, "B" if bold else "", 8.5)
-            pdf.cell(w, 5.5, txt(v)[:48])
+            pdf.cell(w, 5.5, fit(v, w))
         pdf.ln()
     pdf.ln(4)
     pdf.set_font(fam, "", 7.5)

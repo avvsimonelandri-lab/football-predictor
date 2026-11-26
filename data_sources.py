@@ -30,7 +30,7 @@ FD_BASE = "https://www.football-data.co.uk/mmz4281/{code}/{div}.csv"
 FD_FIXTURES = "https://www.football-data.co.uk/fixtures.csv"
 OF_BASE = "https://raw.githubusercontent.com/openfootball/football.json/master/{season}/{key}.json"
 
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) FootballPredictorPro/2.0"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) FootballPredictorPro/2.5"
 
 
 # --------------------------------------------------------------------------- rete
@@ -58,7 +58,8 @@ def http_get(url: str, timeout: int = 25, retries: int = 2) -> bytes | None:
             last = e
         except Exception as e:  # rete assente, timeout, DNS...
             last = e
-        time.sleep(1.5 * (attempt + 1))
+        if attempt < retries:  # nessuna attesa inutile dopo l'ultimo tentativo
+            time.sleep(1.5 * (attempt + 1))
     print(f"[rete] {url} -> {last}")
     return None
 
