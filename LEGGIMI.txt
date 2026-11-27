@@ -154,3 +154,17 @@ In "Analisi partita" c'è una quarta sottoscheda con:
 - Forma e precedenti con etichette colorate V / N / P.
 - Prossime partite: intestazione scura, esito più probabile in verde.
 - Il tema scuro (Impostazioni → Aspetto) continua a funzionare.
+
+
+5. VERSIONE PER TELEFONO (2.5)
+------------------------------
+- Stessa grafica del programma: intestazione blu notte con striscia verde,
+  esito più probabile in verde, colori fissi blu / grigio / arancio, etichetta
+  dorata "VALORE". Pulsante in alto per il tema: auto, chiaro o scuro.
+- Toccando una partita si apre l'analisi completa in quattro sottoschede, come
+  in "Analisi partita": Esito e gol (doppia chance, gol attesi, risultati esatti,
+  Under/Over a barre, somma gol, multigol anche per squadra, combo, confronto
+  con le quote), 1° tempo (anche 2° tempo, parziale/finale, Under/Over per
+  tempo), Angoli · Cartellini · Tiri (totali e per squadra) e la nuova
+  "Forma e precedenti".
+- Classifica con la forma a etichette colorate V / N / P.

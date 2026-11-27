@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f1115">
+<meta name="theme-color" content="#0F1B2D">
 <meta name="robots" content="noindex">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -12,81 +12,129 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
-<title>Football Predictor</title>
+<title>Football Predictor Pro</title>
 <style>
+/* Stessi colori del programma Windows 2.5 (app.py, dizionario C) */
 :root{
-  --bg:#f5f6f8;--panel:#ffffff;--panel2:#eef0f4;--line:#dfe2e8;--text:#14171f;--muted:#5d6475;
-  --red:#c62828;--blue:#2f6fe0;--gold:#b7860b;--goldbg:#fff3c4;--ok:#1f8a3b;--ko:#c62828;
-  --b1:#2f6fe0;--bx:#9aa1ae;--b2:#d49a14;
+  --bg:#EDF1F5;--panel:#FFFFFF;--panel2:#F4F6F9;--line:#DDE3EA;--text:#0F1B2D;--muted:#5E6B7D;
+  --accent:#0A9F55;--red:#E5383B;--gold:#C98A00;--goldbg:#FFF4D6;
+  --header:#0F1B2D;--header2:#1C2B42;--hmuted:#A9B6C8;
+  --home:#1F6FEB;--draw:#7D8A9C;--away:#F0812B;--track:#E3E8EE;--under:#3B82F6;--over:#0A9F55;--hl:#E8F6EE;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0f1115;--panel:#171a21;--panel2:#1e222b;--line:#2a2f3a;--text:#e7e9ee;--muted:#8a90a0;
-  --red:#e53935;--blue:#4f8ef7;--gold:#e0b03a;--goldbg:#3a2f12;--ok:#43c463;--ko:#ff6b6b;
-  --b1:#4f8ef7;--bx:#6b7280;--b2:#e0b03a;}}
+  --accent:#16B364;--gold:#F2C230;--goldbg:#3a2f12;--header:#0b0e13;--header2:#1a2030;--hmuted:#8a90a0;
+  --home:#4F8EF7;--draw:#9AA5B4;--away:#F59E4B;--track:#2a2f3a;--under:#4F8EF7;--over:#16B364;--hl:#16301f;}}
 :root[data-theme="dark"]{
   --bg:#0f1115;--panel:#171a21;--panel2:#1e222b;--line:#2a2f3a;--text:#e7e9ee;--muted:#8a90a0;
-  --red:#e53935;--blue:#4f8ef7;--gold:#e0b03a;--goldbg:#3a2f12;--ok:#43c463;--ko:#ff6b6b;
-  --b1:#4f8ef7;--bx:#6b7280;--b2:#e0b03a;}
+  --accent:#16B364;--gold:#F2C230;--goldbg:#3a2f12;--header:#0b0e13;--header2:#1a2030;--hmuted:#8a90a0;
+  --home:#4F8EF7;--draw:#9AA5B4;--away:#F59E4B;--track:#2a2f3a;--under:#4F8EF7;--over:#16B364;--hl:#16301f;}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
-.wrap{max-width:720px;margin:0 auto;padding:0 16px 40px}
-header{position:sticky;top:0;z-index:5;background:var(--bg);padding:calc(14px + env(safe-area-inset-top)) 0 8px;border-bottom:1px solid var(--line)}
-h1{font-size:20px;margin:0;letter-spacing:-.01em}
-.sub{color:var(--muted);font-size:12.5px;margin-top:2px}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none}
+html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.4 "Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit}
+header{position:sticky;top:0;z-index:5;background:var(--header);color:#fff;border-bottom:4px solid var(--accent);padding-top:env(safe-area-inset-top)}
+.hin{max-width:760px;margin:0 auto;padding:12px 16px 10px}
+.top{display:flex;align-items:center;gap:10px}
+h1{font-size:16px;margin:0;letter-spacing:.03em;font-weight:800;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+h1 small{font-weight:600;color:var(--accent);font-size:12px;margin-left:6px;letter-spacing:0}
+.theme{border:1px solid var(--header2);background:var(--header2);color:var(--hmuted);border-radius:999px;padding:4px 10px;font-size:12px;cursor:pointer}
+.sub{color:var(--hmuted);font-size:12px;margin-top:2px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:6px 12px;font-size:13.5px;cursor:pointer}
-.chip.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
-.tabs{display:flex;background:var(--panel2);border-radius:10px;padding:3px;margin-top:8px}
-.tab{flex:1;text-align:center;padding:7px 4px;border-radius:8px;font-size:14px;cursor:pointer;color:var(--muted);border:0;background:none}
-.tab.on{background:var(--panel);color:var(--text);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.chip{flex:none;border:1px solid var(--header2);background:var(--header2);color:#fff;border-radius:999px;padding:6px 13px;font-size:13.5px;cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);font-weight:700}
+.tabs{display:flex;background:var(--header2);border-radius:999px;padding:3px;margin-top:9px}
+.tab{flex:1;text-align:center;padding:7px 4px;border-radius:999px;font-size:14px;cursor:pointer;color:var(--hmuted);border:0;background:none}
+.tab.on{background:var(--accent);color:#fff;font-weight:700}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px 40px}
 .meta{color:var(--muted);font-size:12px;margin:12px 0 4px}
-.day{font-weight:700;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:18px 0 8px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.day{font-weight:800;font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:18px 0 8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;box-shadow:0 1px 2px rgba(15,27,45,.05);overflow:hidden}
+.head{padding:12px 14px 10px;cursor:pointer}
 .row1{display:flex;align-items:center;gap:10px}
-.time{font-size:12.5px;color:var(--muted);width:40px;flex:none}
+.time{font-size:12.5px;color:var(--muted);width:40px;flex:none;font-weight:600}
 .teams{flex:1;min-width:0}
 .teams div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
-.badge{flex:none;background:var(--goldbg);color:var(--gold);font-weight:700;font-size:12px;border-radius:8px;padding:3px 7px}
-.bar{display:flex;height:8px;border-radius:5px;overflow:hidden;margin:10px 0 4px;background:var(--panel2)}
-.bar i{display:block;height:100%}
+.teams div:first-child::before,.teams div:last-child::before{content:"";display:inline-block;width:4px;height:12px;border-radius:2px;margin-right:7px;vertical-align:-1px}
+.teams div:first-child::before{background:var(--home)}.teams div:last-child::before{background:var(--away)}
+.vbadge{flex:none;background:var(--goldbg);color:var(--gold);font-weight:800;font-size:11.5px;border-radius:999px;padding:3px 8px;letter-spacing:.02em}
+.bar3{display:flex;height:8px;border-radius:5px;overflow:hidden;margin:10px 0 5px;background:var(--track)}
+.bar3 i{display:block;height:100%}
 .pcts{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
 .pcts b{color:var(--text)}
-.pcts .best{color:var(--gold)}
+.pcts .best,.pcts .best b{color:var(--accent);font-weight:800}
 .kv{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.kv span{background:var(--panel2);border-radius:7px;padding:3px 8px;font-size:12.5px}
-.more{display:none;margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+.kv span{background:var(--panel2);border-radius:999px;padding:3px 9px;font-size:12px}
+.more{display:none;border-top:1px solid var(--line);background:var(--panel2);padding:10px 12px 12px}
 .card.open .more{display:block}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.box{background:var(--panel2);border-radius:10px;padding:8px 10px;font-size:13px}
-.box h4{margin:0 0 4px;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-.box table{width:100%;border-collapse:collapse}
-.box td{padding:1px 0;white-space:nowrap}
-.box td:last-child{text-align:right;font-variant-numeric:tabular-nums}
-.hint{font-size:11.5px;color:var(--muted);text-align:center;margin-top:4px}
+.stabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:10px}
+.stabs::-webkit-scrollbar{display:none}
+.stab{flex:none;border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:999px;padding:5px 11px;font-size:12.5px;cursor:pointer}
+.stab.on{background:var(--header);border-color:var(--header);color:#fff;font-weight:700}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.box h4{margin:0 0 6px;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.box h5{margin:10px 0 4px;font-size:12px;color:var(--text)}
+.boxes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.boxes .box{margin:0}
+.tiles{display:grid;gap:6px;margin:4px 0}
+.t2{grid-template-columns:repeat(2,1fr)}.t3{grid-template-columns:repeat(3,1fr)}.t4{grid-template-columns:repeat(4,1fr)}
+.tl{background:var(--panel2);border-radius:10px;padding:7px 4px;text-align:center;border:1px solid transparent}
+.tl.hl{background:var(--hl);border-color:var(--accent)}
+.tl small{display:block;color:var(--muted);font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl b{display:block;font-size:19px;line-height:1.2}
+.tl.big b{font-size:24px}
+.tl.hl b{color:var(--accent)}
+.tl em{display:block;font-style:normal;color:var(--muted);font-size:10.5px}
+.br{display:flex;align-items:center;gap:8px;font-size:12.5px;margin:3px 0}
+.br .l{width:92px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.br .tr{flex:1;height:8px;background:var(--track);border-radius:5px;overflow:hidden}
+.br .tr i{display:block;height:100%;border-radius:5px;background:var(--accent)}
+.br .v{width:38px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.uo{display:flex;align-items:center;gap:6px;font-size:12px;margin:3px 0;font-variant-numeric:tabular-nums}
+.uo .l{width:30px;flex:none;color:var(--muted)}
+.uo .v{width:34px;flex:none;font-weight:600}.uo .v:last-child{text-align:right}
+.uo .tr{flex:1;display:flex;height:8px;border-radius:5px;overflow:hidden}
+.uo .tr i:first-child{background:var(--under)}.uo .tr i:last-child{background:var(--over)}
+.note{color:var(--muted);font-size:11.5px;margin-top:6px;line-height:1.45}
+table.q{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+table.q th{color:var(--muted);font-weight:600;font-size:11px;text-align:right;padding:3px 2px}
+table.q td{text-align:right;padding:4px 2px;border-top:1px solid var(--line)}
+table.q th:first-child,table.q td:first-child{text-align:left;font-weight:700}
+.lab{display:inline-block;background:var(--gold);color:#fff;font-weight:800;font-size:10px;border-radius:999px;padding:2px 6px}
+.fr{display:flex;align-items:center;gap:6px;font-size:12.5px;margin:4px 0}
+.fr .d{width:44px;flex:none;color:var(--muted);font-size:11.5px}
+.fr .o{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fr .s{width:32px;text-align:center;font-weight:700}
+.pill{display:inline-block;min-width:20px;text-align:center;color:#fff;font-weight:800;font-size:11px;border-radius:6px;padding:2px 5px;flex:none}
+.pV{background:var(--accent)}.pN{background:var(--draw)}.pP{background:var(--red)}.pC{background:var(--home)}.pT{background:var(--header2)}
+.p1{background:var(--home)}.pX{background:var(--draw)}.p2{background:var(--away)}
+.hh{display:flex;align-items:center;gap:6px;font-size:12.5px;margin:4px 0}
+.hh .d{width:58px;flex:none;color:var(--muted);font-size:11.5px}
+.hh .a,.hh .b{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hh .a{text-align:right}.hh .w{font-weight:800}
+.hint{font-size:11.5px;color:var(--muted);text-align:center;margin-top:6px}
 table.std{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px}
-table.std th{color:var(--muted);font-weight:600;font-size:12px;text-align:right;padding:8px 6px;border-bottom:1px solid var(--line)}
+table.std th{background:var(--header);color:#fff;font-weight:600;font-size:12px;text-align:right;padding:8px 6px}
 table.std td{padding:7px 6px;text-align:right;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
 table.std td:nth-child(2),table.std th:nth-child(2){text-align:left}
-table.std td:nth-child(2){max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+table.std td:nth-child(2){max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 table.std tr:last-child td{border-bottom:0}
-.form{letter-spacing:1px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
-.tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
-.tile b{display:block;font-size:20px}
-.tile small{color:var(--muted);font-size:11.5px}
+.fx{display:inline-flex;gap:2px}.fx .pill{min-width:16px;padding:1px 3px;font-size:10px;border-radius:4px}
+.stiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.stile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.stile b{display:block;font-size:20px;color:var(--accent)}
+.stile small{color:var(--muted);font-size:11.5px}
 .hrow{display:flex;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:6px;font-size:13.5px}
 .hrow .m{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ok{color:var(--ok);font-weight:700}.ko{color:var(--ko);font-weight:700}.wait{color:var(--muted)}
+.ok{color:var(--accent);font-weight:800}.ko{color:var(--red);font-weight:800}.wait{color:var(--muted)}
 .empty{color:var(--muted);text-align:center;padding:30px 10px}
 footer{color:var(--muted);font-size:11.5px;margin-top:26px;line-height:1.5}
-@media (max-width:380px){.grid{grid-template-columns:1fr}}
+@media (max-width:400px){.boxes{grid-template-columns:1fr}.tl.big b{font-size:21px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>Football Predictor</h1>
+<header><div class="hin">
+  <div class="top"><h1>FOOTBALL PREDICTOR PRO<small id="ver"></small></h1><button class="theme" id="theme"></button></div>
   <div class="sub" id="sub"></div>
   <div class="chips" id="chips"></div>
   <div class="tabs" id="tabs">
@@ -94,24 +142,41 @@ footer{color:var(--muted);font-size:11.5px;margin-top:26px;line-height:1.5}
     <button class="tab" data-t="c">Classifica</button>
     <button class="tab" data-t="s">Storico</button>
   </div>
-</header>
+</div></header>
+<div class="wrap">
 <main id="main"></main>
-<footer>Stime statistiche (modello Dixon-Coles con forma recente, fattore campo e, dove ci sono le quote, stima combinata con i bookmaker). Il modello non conosce infortuni e formazioni. Il gioco è vietato ai minori e può causare dipendenza.</footer>
+<footer>Stime statistiche (modello Dixon-Coles con forma recente, fattore campo, xG dai tiri e, dove ci sono le quote, stima combinata con i bookmaker). Il modello non conosce infortuni e formazioni. Il gioco è vietato ai minori e può causare dipendenza.</footer>
 </div>
 <script>
 const DATA = /*__DATA__*/null;
 const $ = s => document.querySelector(s);
 const pc = x => x == null ? "–" : Math.round(x * 100) + "%";
+const fair = x => x ? (1 / x).toFixed(2) : "–";
 const GG = ["Dom","Lun","Mar","Mer","Gio","Ven","Sab"];
 const MESI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
-function dayLabel(iso){const d=new Date(iso+"T12:00:00");return `${GG[d.getDay()]} ${d.getDate()} ${MESI[d.getMonth()]}`;}
+const OUT = {"1":"var(--home)","X":"var(--draw)","2":"var(--away)"};
+function dt(iso){return new Date(iso+"T12:00:00");}
+function dayLabel(iso){const d=dt(iso);return `${GG[d.getDay()]} ${d.getDate()} ${MESI[d.getMonth()]}`;}
+function dm(iso,y){const d=dt(iso);return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}${y?"/"+String(d.getFullYear()).slice(2):""}`;}
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
+const argmax = o => Object.keys(o).reduce((a,b)=>o[a]>=o[b]?a:b);
 
 let league = null, tab = "m";
+const subTab = {};   // sottoscheda aperta per ogni partita
+
+/* ---------- tema: Come il telefono / Chiaro / Scuro ---------- */
+const THEMES = [["auto","Tema: auto"],["light","Tema: chiaro"],["dark","Tema: scuro"]];
+function applyTheme(t){
+  if(t==="auto") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme",t);
+  $("#theme").textContent = THEMES.find(x=>x[0]===t)[1];
+}
 
 function init(){
+  let th = store("fpp_theme")||"auto"; applyTheme(th);
+  $("#theme").addEventListener("click",()=>{const i=THEMES.findIndex(x=>x[0]===th); th=THEMES[(i+1)%3][0]; store("fpp_theme",th); applyTheme(th);});
   if(!DATA || !DATA.leagues.length){$("#main").innerHTML='<div class="empty">Nessun dato disponibile.</div>';return;}
+  if(DATA.version) $("#ver").textContent = "v"+DATA.version;
   const upd = DATA.updated ? new Date(DATA.updated) : null;
   $("#sub").textContent = upd ? `Dati aggiornati il ${upd.getDate()}/${upd.getMonth()+1} alle ${String(upd.getHours()).padStart(2,"0")}:${String(upd.getMinutes()).padStart(2,"0")}` : "";
   const saved = store("fpp_league");
@@ -130,61 +195,169 @@ function render(){
   const on = document.querySelector(".chip.on"); if(on) on.scrollIntoView({inline:"center",block:"nearest"});
 }
 
-function tbl(rows){return `<table>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("")}</table>`;}
+/* ---------- piccoli elementi grafici ---------- */
+function tiles(items,cls){
+  return `<div class="tiles t${items.length}">${items.map(t=>`<div class="tl${t.hl?" hl":""}${cls?" "+cls:""}"><small${t.c?` style="color:${t.c}"`:""}>${esc(t.t)}</small><b>${t.v}</b>${t.s?`<em>${t.s}</em>`:""}</div>`).join("")}</div>`;
+}
+function tiles1x2(d,names,big){
+  const b = argmax(d);
+  return tiles(["1","X","2"].map((k,i)=>({t:names?names[i]:k, v:pc(d[k]), s:"quota equa "+fair(d[k]), c:OUT[k], hl:k===b})), big?"big":"");
+}
+function bar(label,p,scale,color,right){
+  const w = Math.max(0,Math.min(100,(p||0)/(scale||1)*100));
+  return `<div class="br"><span class="l">${label}</span><span class="tr"><i style="width:${w}%${color?";background:"+color:""}"></i></span><span class="v">${right!==undefined?right:pc(p)}</span></div>`;
+}
+function uo(label,pair){
+  if(!pair) return "";
+  const [u,o]=pair;
+  return `<div class="uo"><span class="l">${label}</span><span class="v">${pc(u)}</span><span class="tr"><i style="width:${u*100}%"></i><i style="width:${o*100}%"></i></span><span class="v">${pc(o)}</span></div>`;
+}
+const box = (title,body,full) => `<div class="box"${full?' style="grid-column:1/-1"':""}><h4>${title}</h4>${body}</div>`;
+const note = t => `<div class="note">${t}</div>`;
 
+/* ---------- elenco partite ---------- */
 function renderMatches(L){
-  const last = L.last ? new Date(L.last+"T12:00:00") : null;
+  const last = L.last ? dt(L.last) : null;
   let h = `<div class="meta">Stagione ${esc(L.season||"")} · ${L.played||0} partite giocate${last?` · ultimo risultato ${last.getDate()}/${last.getMonth()+1}`:""}</div>`;
   if(!L.matches.length) return h + '<div class="empty">Nessuna partita nei prossimi giorni (pausa o calendario non ancora pubblicato).</div>';
   let cur = "";
   L.matches.forEach((m,i) => {
     if(m.d!==cur){cur=m.d; h+=`<div class="day">${dayLabel(m.d)}</div>`;}
-    const best = Object.keys(m.p).reduce((a,b)=>m.p[a]>=m.p[b]?a:b);
-    const val = m.val ? `<span class="badge">${esc(m.val.m)} @${m.val.q.toFixed(2)}</span>` : "";
-    let more = `<div class="grid">`;
-    more += `<div class="box"><h4>1X2 ${m.comb?"(combinata)":""}</h4>${tbl([["1",pc(m.p["1"])],["X",pc(m.p.X)],["2",pc(m.p["2"])]])}</div>`;
-    more += `<div class="box"><h4>Doppia chance</h4>${tbl(Object.entries(m.dc).map(([k,v])=>[k,pc(v)]))}</div>`;
-    more += `<div class="box"><h4>Over</h4>${tbl(Object.entries(m.uo).map(([k,v])=>["Over "+k,pc(k==="2.5"?m.o25:v)]))}</div>`;
-    more += `<div class="box"><h4>Risultati esatti</h4>${tbl(m.sc.map(([s,v])=>[s,pc(v)]))}</div>`;
-    more += `<div class="box"><h4>Multigol</h4>${tbl(Object.entries(m.mg).map(([k,v])=>["MG "+k,pc(v)]))}</div>`;
-    if(m.pt && m.pt["1"]!=null) more += `<div class="box"><h4>1° tempo</h4>${tbl([["1",pc(m.pt["1"])],["X",pc(m.pt.X)],["2",pc(m.pt["2"])],["Gol nel 1°T",pc(m.o05pt)]])}</div>`
-      + `<div class="box"><h4>Parziale / finale</h4>${tbl(m.ptft.map(([k,v])=>[k,pc(v)]))}</div>`;
-    if(m.ang) more += `<div class="box"><h4>Angoli (attesi ${(m.ang.e[0]+m.ang.e[1]).toFixed(1)})</h4>${tbl(Object.entries(m.ang.tot).slice(1,5).map(([k,v])=>["Over "+k,pc(v)]))}</div>`;
-    if(m.car) more += `<div class="box"><h4>Cartellini (attesi ${(m.car.e[0]+m.car.e[1]).toFixed(1)})</h4>${tbl(Object.entries(m.car.tot).slice(0,4).map(([k,v])=>["Over "+k,pc(v)]))}</div>`;
-    if(m.mk && m.mk.length) more += `<div class="box" style="grid-column:1/-1"><h4>Quote · bookmaker · stima</h4>${tbl(m.mk.map(x=>[`${esc(x.m)} @${x.q.toFixed(2)}${x.v?' <span class="badge">valore</span>':""}`,`${pc(x.b)} · ${pc(x.c)}`]))}</div>`;
-    more += `</div><div class="hint">Gol attesi ${m.xg[0].toFixed(2)} – ${m.xg[1].toFixed(2)}</div>`;
-    h += `<div class="card" data-i="${i}">
+    const best = argmax(m.p);
+    const val = m.val ? `<span class="vbadge">VALORE ${esc(m.val.m)} @${m.val.q.toFixed(2)}</span>` : "";
+    h += `<div class="card" data-i="${i}"><div class="head">
       <div class="row1"><div class="time">${esc(m.t||"")}</div><div class="teams"><div>${esc(m.h)}</div><div>${esc(m.a)}</div></div>${val}</div>
-      <div class="bar"><i style="width:${m.p["1"]*100}%;background:var(--b1)"></i><i style="width:${m.p.X*100}%;background:var(--bx)"></i><i style="width:${m.p["2"]*100}%;background:var(--b2)"></i></div>
-      <div class="pcts">${["1","X","2"].map(k=>`<span class="${k===best?"best":""}">${k} <b class="${k===best?"best":""}">${pc(m.p[k])}</b></span>`).join("")}</div>
+      <div class="bar3"><i style="width:${m.p["1"]*100}%;background:var(--home)"></i><i style="width:${m.p.X*100}%;background:var(--draw)"></i><i style="width:${m.p["2"]*100}%;background:var(--away)"></i></div>
+      <div class="pcts">${["1","X","2"].map(k=>`<span class="${k===best?"best":""}">${k} <b>${pc(m.p[k])}</b></span>`).join("")}</div>
       <div class="kv"><span>Over 2.5 ${pc(m.o25)}</span><span>Goal ${pc(m.gg)}</span><span>Ris. ${esc(m.sc[0][0])}</span>${m.ang?`<span>Angoli ${(m.ang.e[0]+m.ang.e[1]).toFixed(1)}</span>`:""}</div>
-      <div class="more">${more}</div></div>`;
+    </div><div class="more"></div></div>`;
   });
-  return h + '<div class="hint">Tocca una partita per i dettagli</div>';
+  return h + '<div class="hint">Tocca una partita per l\'analisi completa</div>';
 }
 
+/* ---------- analisi partita (4 sottoschede come nel programma) ---------- */
+const SUBS = [["e","Esito e gol"],["t","1° tempo"],["s","Angoli · Cartellini · Tiri"],["f","Forma e precedenti"]];
+function renderDetail(card){
+  const L = DATA.leagues.find(l=>l.name===league), i = +card.dataset.i, m = L.matches[i];
+  const k = league+"|"+i, st = subTab[k] || "e";
+  const body = st==="e" ? dMain(m) : st==="t" ? dHalf(m) : st==="s" ? dStats(m) : dForm(m);
+  card.querySelector(".more").innerHTML = `<div class="stabs">${SUBS.map(([c,t])=>`<button class="stab${c===st?" on":""}" data-s="${c}">${t}</button>`).join("")}</div>${body}`;
+}
+
+function dMain(m){
+  let h = box(`Esito finale${m.comb?" · stima combinata":""}`,
+    tiles1x2(m.p,["1 · "+m.h,"X · Pareggio","2 · "+m.a],true) +
+    tiles(Object.entries(m.dc).map(([k,v])=>({t:"Doppia chance "+k,v:pc(v),s:"quota equa "+fair(v),hl:k===argmax(m.dc)}))) +
+    (m.comb ? note("Solo modello: "+["1","X","2"].map(k=>`${k} ${pc(m.pm[k])}`).join(" · ")) : ""));
+  const gg = m.gg, ng = 1-m.gg;
+  h += box("Gol", tiles([{t:"Gol attesi casa",v:m.xg[0].toFixed(2),c:"var(--home)"},{t:"Gol attesi ospite",v:m.xg[1].toFixed(2),c:"var(--away)"}]) +
+    tiles([{t:"Goal",v:pc(gg),s:"quota equa "+fair(gg),hl:gg>=ng},{t:"No Goal",v:pc(ng),s:"quota equa "+fair(ng),hl:ng>gg}]));
+  h += `<div class="boxes">`;
+  const mx = m.sc[0][1];
+  h += box("Risultati esatti", m.sc.map(([s,v])=>{const [a,b]=s.split("-").map(Number);return bar(s,v,mx,OUT[a>b?"1":a===b?"X":"2"]);}).join("") +
+    note("Blu vittoria casa, grigio pareggio, arancio vittoria ospite."));
+  h += box("Under / Over", Object.entries(m.uo).map(([l,p])=>uo(l, l==="2.5"&&m.o25!=null?[1-m.o25,m.o25]:p)).join("") +
+    note("blu = Under · verde = Over") + (m.sg?`<h5>Somma gol esatta</h5>`+(()=>{const ms=Math.max(...m.sg.map(x=>x[1]));return m.sg.map(([k,v])=>bar(k+" gol",v,ms)).join("");})():""));
+  h += box("Multigol", Object.entries(m.mg).map(([k,v])=>bar("MG "+k,v)).join("") +
+    (m.mgh?`<h5>Casa · ${esc(m.h)}</h5>`+Object.entries(m.mgh).map(([k,v])=>bar("MG "+k,v,1,"var(--home)")).join(""):"") +
+    (m.mga?`<h5>Ospite · ${esc(m.a)}</h5>`+Object.entries(m.mga).map(([k,v])=>bar("MG "+k,v,1,"var(--away)")).join(""):""));
+  if(m.cb) h += box("Combo", Object.entries(m.cb).map(([k,v])=>bar(k,v)).join(""));
+  h += `</div>`;
+  if(m.mk && m.mk.length){
+    let t = `<table class="q"><tr><th>Esito</th><th>Quota</th><th>Book</th><th>Modello</th><th>Comb.</th></tr>` +
+      m.mk.map(x=>`<tr><td>${esc(x.m)}${x.v?` <span class="lab">VALORE${x.e!=null?" +"+Math.round(x.e*100)+"%":""}</span>`:""}</td><td>${x.q.toFixed(2)}</td><td>${pc(x.b)}</td><td>${pc(x.mo)}</td><td><b>${pc(x.c)}</b></td></tr>`).join("") + `</table>`;
+    let n = m.mw!=null ? `Combinata = ${Math.round(m.mw*100)}% modello + ${Math.round((1-m.mw)*100)}% quote. ` : "";
+    n += "«Valore» = la quota paga più di quanto la stima ritiene giusto (vantaggio atteso ≥ 3%).";
+    if(m.mrg!=null) n += ` Margine del bookmaker: ${(m.mrg*100).toFixed(1)}%.`;
+    h += box("Confronto con le quote", t + note(n));
+  } else h += box("Confronto con le quote", note("Quote non ancora disponibili: di solito compaiono pochi giorni prima della partita."));
+  return h;
+}
+
+function dHalf(m){
+  if(!m.pt || m.pt["1"]==null) return '<div class="empty">Dati del primo tempo non disponibili per questo campionato.</div>';
+  let h = box("Esito 1° tempo", tiles1x2(m.pt));
+  if(m.pt2 && m.pt2["1"]!=null) h += box("Esito 2° tempo", tiles1x2(m.pt2) + note("Conta solo i gol segnati nel secondo tempo."));
+  if(m.xpt && m.xpt.length) h += box("Gol nel 1° tempo", tiles([{t:m.h,v:m.xpt[0].toFixed(2),s:"gol attesi",c:"var(--home)"},{t:m.a,v:m.xpt[1].toFixed(2),s:"gol attesi",c:"var(--away)"}]));
+  h += `<div class="boxes">`;
+  const mx = m.ptft.length ? m.ptft[0][1] : 1;
+  h += box("Parziale / finale", m.ptft.map(([k,v])=>bar(k,v,mx,OUT[k.slice(-1)])).join("") + note("esito al 45' / esito finale"));
+  h += box("Under / Over per tempo", (m.uopt?`<h5>1° tempo</h5>`+Object.entries(m.uopt).map(([l,p])=>uo(l,p)).join(""):"") +
+    (m.uost?`<h5>2° tempo</h5>`+Object.entries(m.uost).map(([l,p])=>uo(l,p)).join(""):"") + note("blu = Under · verde = Over"));
+  if(m.tpg) h += box("Tempo con più gol", Object.entries(m.tpg).map(([k,v])=>bar(k,v)).join("") +
+    (m.g12?`<h5>Almeno un gol</h5>`+bar("nel 1° tempo",m.g12[0])+bar("nel 2° tempo",m.g12[1]):""));
+  return h + `</div>`;
+}
+
+function dStats(m){
+  const T = [["ang","Calci d'angolo"],["car","Cartellini (gialli + rossi)"],["tp","Tiri in porta"]];
+  if(!T.some(([k])=>m[k])) return '<div class="empty">Statistiche non disponibili per questo campionato: servono i dati partita di football-data.co.uk.</div>';
+  return T.map(([k,title])=>{
+    const s = m[k];
+    if(!s) return box(title, note("Dati non disponibili per questo campionato."));
+    let b = tiles([{t:"Casa",v:s.e[0].toFixed(1),c:"var(--home)"},{t:"Ospite",v:s.e[1].toFixed(1),c:"var(--away)"},{t:"Totale",v:(s.e[0]+s.e[1]).toFixed(1)}]);
+    b += `<h5>Totale partita</h5>` + Object.entries(s.tot).map(([l,p])=>uo(l,p)).join("");
+    if(s.home) b += `<h5>${esc(m.h)}</h5>` + Object.entries(s.home).map(([l,p])=>uo(l,p)).join("");
+    if(s.away) b += `<h5>${esc(m.a)}</h5>` + Object.entries(s.away).map(([l,p])=>uo(l,p)).join("");
+    if(s.w){const bw=argmax(s.w); b += `<h5>Chi ne fa di più</h5>` + tiles(["1","X","2"].map(x=>({t:x,v:pc(s.w[x]),c:OUT[x],hl:x===bw})));}
+    if(s.n) b += note(`Stima su ${s.n} partite${k==="car"?"; i cartellini dipendono molto dall'arbitro.":"."}`);
+    return box(title,b);
+  }).join("");
+}
+
+function dForm(m){
+  if(!m.fm) return '<div class="empty">Dati non disponibili.</div>';
+  let h = "";
+  [m.h,m.a].forEach((team,i)=>{
+    const f = m.fm[i];
+    if(!f || !f.r.length){h += box("Forma · "+esc(team), note("Nessuna partita nei dati.")); return;}
+    const n = f.r.length;
+    const rows = f.r.map(([d,side,opp,gf,gs,res])=>`<div class="fr"><span class="d">${dm(d)}</span><span class="pill p${side}">${side}</span><span class="o">${esc(opp)}</span><span class="s">${gf}-${gs}</span><span class="pill p${res}">${res}</span></div>`).join("");
+    h += box("Forma · "+esc(team), rows + tiles([{t:"Punti",v:`${f.pts}/${3*n}`},{t:"Gol",v:`${f.gf}-${f.gs}`},{t:"Over 2.5",v:`${f.ov}/${n}`},{t:"Goal",v:`${f.gg}/${n}`}]) +
+      note("C = in casa, T = in trasferta · V vinta, N pari, P persa · la più recente in alto"));
+  });
+  const H = m.h2h || [];
+  let b = H.length ? H.map(([d,ht,at,hg,ag])=>{const w=hg>ag?"1":hg===ag?"X":"2";
+      return `<div class="hh"><span class="d">${dm(d,true)}</span><span class="a${hg>ag?" w":""}">${esc(ht)}</span><span class="pill p${w}">${hg}-${ag}</span><span class="b${ag>hg?" w":""}">${esc(at)}</span></div>`;}).join("")
+    : note("Nessun precedente nei dati.");
+  if(H.length){
+    const n=H.length, win=t=>H.filter(([,ht,at,hg,ag])=>(ht===t&&hg>ag)||(at===t&&ag>hg)).length, wh=win(m.h), wa=win(m.a);
+    b += tiles([{t:m.h,v:wh,s:"vittorie",c:"var(--home)"},{t:"Pari",v:n-wh-wa,c:"var(--draw)"},{t:m.a,v:wa,s:"vittorie",c:"var(--away)"}]);
+    b += note(`Over 2.5 in ${H.filter(x=>x[3]+x[4]>2.5).length} su ${n} · Goal in ${H.filter(x=>x[3]>0&&x[4]>0).length} su ${n}`);
+  }
+  b += note("Forma e precedenti sono indicativi: il modello li considera già, dando più peso alle partite recenti.");
+  return h + box("Precedenti · stagione in corso e precedente", b);
+}
+
+/* ---------- classifica e storico ---------- */
 function renderTable(L){
   if(!L.table.length) return '<div class="empty">Classifica non disponibile.</div>';
+  const fx = f => `<span class="fx">${String(f||"").split("").map(c=>c==="V"||c==="N"||c==="P"?`<span class="pill p${c}">${c}</span>`:esc(c)).join("")}</span>`;
   return `<div class="meta">Calcolata dai risultati; eventuali penalizzazioni non incluse.</div><table class="std"><tr><th>#</th><th>Squadra</th><th>PG</th><th>DR</th><th>Pt</th><th>Forma</th></tr>${
-    L.table.map(r=>`<tr><td>${r.r}</td><td>${esc(r.t)}</td><td>${r.pg}</td><td>${r.dr>0?"+":""}${r.dr}</td><td><b>${r.pt}</b></td><td class="form">${esc(r.f)}</td></tr>`).join("")}</table>`;
+    L.table.map(r=>`<tr><td>${r.r}</td><td>${esc(r.t)}</td><td>${r.pg}</td><td>${r.dr>0?"+":""}${r.dr}</td><td><b>${r.pt}</b></td><td>${fx(r.f)}</td></tr>`).join("")}</table>`;
 }
 
 function renderHist(L){
   const s = L.hist || {}, a = DATA.hist_all || {};
   let h = "";
   if(s.n){
-    h += `<div class="tiles"><div class="tile"><b>${pc(s.acc_1x2)}</b><small>1X2 indovinati</small></div><div class="tile"><b>${pc(s.acc_over)}</b><small>Over/Under 2.5</small></div><div class="tile"><b>${pc(s.acc_gg)}</b><small>Goal/No Goal</small></div></div>`;
+    h += `<div class="stiles"><div class="stile"><b>${pc(s.acc_1x2)}</b><small>1X2 indovinati</small></div><div class="stile"><b>${pc(s.acc_over)}</b><small>Over/Under 2.5</small></div><div class="stile"><b>${pc(s.acc_gg)}</b><small>Goal/No Goal</small></div></div>`;
     h += `<div class="meta">${s.n} partite concluse in ${esc(L.name)}, ${s.pending} in attesa.`;
     if(s.value) h += ` Segnalazioni «valore»: ${s.value.n}, vinte ${s.value.won}; saldo simulato con 1 € ciascuna: ${s.value.profit>=0?"+":""}${s.value.profit.toFixed(2)} €.`;
     h += `</div>`;
   } else h += `<div class="meta">Nessuna partita conclusa per ora in ${esc(L.name)}${s.pending?` (${s.pending} pronostici in attesa)`:""}.</div>`;
   if(a.n) h += `<div class="meta">Tutti i campionati: ${a.n} partite, 1X2 indovinato ${pc(a.acc_1x2)}.</div>`;
   if(!L.recent.length) return h + '<div class="empty">I pronostici vengono salvati prima delle partite e confrontati con il risultato.</div>';
-  h += L.recent.map(e=>`<div class="hrow"><span class="wait" style="width:52px">${new Date(e.d+"T12:00:00").getDate()}/${new Date(e.d+"T12:00:00").getMonth()+1}</span><span class="m">${esc(e.h)} – ${esc(e.a)}</span><span>${e.k} ${pc(e.p)}</span><span style="width:40px;text-align:right">${e.res||"–"}</span><span style="width:20px;text-align:center" class="${e.ok===null?"wait":e.ok?"ok":"ko"}">${e.ok===null?"·":e.ok?"✓":"✗"}</span></div>`).join("");
+  h += L.recent.map(e=>`<div class="hrow"><span class="wait" style="width:46px">${dm(e.d)}</span><span class="m">${esc(e.h)} – ${esc(e.a)}</span><span>${e.k} ${pc(e.p)}</span><span style="width:40px;text-align:right">${e.res||"–"}</span><span style="width:20px;text-align:center" class="${e.ok===null?"wait":e.ok?"ok":"ko"}">${e.ok===null?"·":e.ok?"✓":"✗"}</span></div>`).join("");
   return h;
 }
 
-document.addEventListener("click", e => {const c=e.target.closest(".card"); if(c) c.classList.toggle("open");});
+document.addEventListener("click", e => {
+  const sb = e.target.closest(".stab");
+  if(sb){const card=sb.closest(".card"); subTab[league+"|"+card.dataset.i]=sb.dataset.s; renderDetail(card); return;}
+  const hd = e.target.closest(".head");
+  if(hd){const card=hd.closest(".card"); const open=!card.classList.contains("open"); card.classList.toggle("open",open); if(open) renderDetail(card);}
+});
 init();
 </script>
 </body>
